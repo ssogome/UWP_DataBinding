@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="UWP_DataBinding.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWP_DataBinding"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+  
+    <Page.Resources>
+        <Thickness x:Key="DefaultMargin">20</Thickness>
+
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="{StaticResource DefaultMargin}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="{StaticResource DefaultMargin}"/>
+            <Setter Property="MaxWidth" Value="100"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="{StaticResource DefaultMargin}"/>
+            <Setter Property="MaxHeight" Value="15"/>
+            <Setter Property="MaxWidth" Value="75"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="25"/>
+        </Style>
+        
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="{StaticResource DefaultMargin}"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="40"/>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Slider x:Name="MsDelaySlider" />
+        <Slider x:Name="SecondSlider"/>
+
+        <TextBox Text="{Binding Value, ElementName=MsDelaySlider, Mode=TwoWay, FallbackValue=0}"/>
+
+        <!--<TextBlock Text="{Binding Value, ElementName=MsDelaySlider, Converter={StaticResource NumericToMsDelayConverter}}"/>-->
+        <TextBlock Text="{x:Bind MsDelay, Converter={StaticResource NumericToMsDelayConverter}, Mode=OneWay}"/>
+
+        <!--<TextBlock Text="{x:Bind Sum(MsDelaySlider.Value, SecondSlider.Value), Mode=OneWay}"/>-->
+
+        <Button Content="Run task" Click="Button_Click"  />
+    </StackPanel>
+</Page>
